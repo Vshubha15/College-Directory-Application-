@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+</head>
+<body>
+    <link rel="stylesheet" href="style.css">
+    <h1>College Directory Application</h1>
+    <h4>Objective:</h4>
+    <pre>Develop a College Directory Application to facilitate seamless interaction between students, 
+faculty members, and administrators within a single college. The application will allow users to 
+manage and access personal and academic information efficiently.</pre>
+    <h4>User Roles:</h4>
+    <ol><li>Student</li>
+<li>Faculty Members</li>
+    <li>Administrator</li></ol>
+    <h4>Requirements:</h4> 
+    <ol><li>Login Page</li><br>
+        User Interface:
+    <ul><li>Simple form with fields for Username, Password, and a role selection dropdown (Student/Faculty Member/Administrator).</li>
+      <li>Submit button to log in.</li></ul>
+    Functionality:
+    <ul><li>Validate user credentials against the database.</li>
+        <li>Redirect users to their respective dashboards based on their role.</li>
+       <li> Implement error handling for incorrect credentials.
+        </li></ul>
+    <br>
+   <li>Student Interface</li>
+   <ul><li>A.View Personal Profile</li>
+   <ul><li>User Interface:</li>
+   <ul><li>Display personal information (name, photo, contact details).</li>
+<li>Display academic information (courses, grades, attendance).</li></ul>
+<li>Functionality:</li>
+<ul><li>Fetch and display the student's profile details from the database.</li></ul></ul><br>
+<li>B.Search for Other Students</li>
+<ul><li>User Interface:</li>
+    <ul><li>Search bar with filters for name, department, or year.</li>
+       <li> List view displaying basic details of matching students.</li></ul>
+       <li>Functionality:</li>
+       <ul><li>Implement search functionality to query the database.</li>
+        <li>Display search results dynamically.</li>
+        </ul></ul><br>
+        <li>C.Contact Faculty Advisors</li>
+        <ul><li>User Interface:</li>
+            <ul><li>List view of assigned faculty advisors with contact options (email, phone).</li></ul>
+            <li>Functionality:</li>
+            <ul><li>Fetch and display advisor details from the database.</li>
+                <li>Provide contact links for email or phone.
+                </li></ul>
+      
+</ul></ul><br>
+<li>Faculty Member Interface</li>
+    <ul><li>A.Manage Class List</li>
+    <ul><li>User Interface:</li>
+    <ul><li>List view of students in the faculty member's courses with columns for student names, photos, and contact information.</li></ul></ul>
+
+<li>Functionality:</li>
+<ul><li>Fetch and display class list from the database.</li></ul>
+<li>Update Profile</li>
+<ul><li>User Interface:</li>
+    <ul><li>Form to update office hours, contact email, and phone number.</li></ul>
+    <li>Functionality:</li>
+    <ul><li>Validate and save updated profile information to the database.</li> 
+       <li>Ensure students can view the updated profile. </li></ul></ul></ul><br>
+       <li>Administrator Interface</li>
+       <ul><li>A. Manage Student and Faculty Records</li>
+    <ul><li>User Interface:</li>
+    <ul><li>Form to add, update, or remove student and faculty records.</li>
+       <li> List view of records with options for CRUD operations.
+        </li></ul>
+        <li>Functionality:</li>
+        <ul><li>Implement CRUD operations for student and faculty records in the database.</li>
+          <li> Ensure changes are reflected immediately in the directory.
+            </li></ul></ul>
+        <li>B. Dashboard With Graphs</li>
+    <ul><li>User Interface:</li>
+    <ul><li>Interface to view graphical representations of key data points (e.g., student enrollment trends, faculty course loads).</li>
+        <li>Include charts and graphs for visual representation of data.
+        </li></ul>
+    <li>Functionality:</li>
+<ul><li>Fetch and aggregate data for graphical display.</li>
+    <li>Provide interactive elements for data visualization.
+    </li></ul>
+</ol>
+<h4>Technical Requirements:</h4>
+<ol><li>Frontend:</li>
+<ul><li>Use React or HTML/CSS/JavaScript.</li>
+   <li> Implement state management for handling form inputs and API responses.
+    </li></ul><br>
+<li>Backend:</li>
+<ul><li>Use Java with the Spring Boot framework.</li>
+    <li>Create RESTful API endpoints for:</li>
+    <ul><li>User authentication and authorization.</li>
+    <li>CRUD operations for profiles and records.</li>
+    <li>Fetching student and faculty details.</li>
+    <li>Dashboard data aggregation.</li></ul>
+    <li>Implement data validation and error handling.</li>
+    </li></ul><br>
+<li>Authentication:</li>
+<ul><li>Implement user authentication and authorization using JWT or session-based authentication.</li>
+   <li>Protect API endpoints to ensure that only authorized users can access certain functionalities.</li>
+   <li> Role-based access control for advanced security.</li>
+    </li></ul><br>
+<li>Database:</li>
+<ul><li>Use PostgreSQL.</li>
+    <div class = "box">
+    Entities
+    <ol><li>User</li>
+    <ul><li>Fields:</li>
+   <ul><li>id: Unique identifier for each user.</li>
+    <li>username: Login name for the user.</li>
+    <li>password: Encrypted password for the user.</li>
+    <li>role: Role of the user, defined using an enum (Student, FacultyMember, Administrator).</li>
+    <li>name: Full name of the user.</li>
+    <li>email: Contact email of the user.</li>
+<li>phone: Contact phone number of the user.</li></ul>
+    <li>Explanation: This entity stores the basic login credentials and contact information for all users in the system. The role field, using an enum, helps in differentiating between students, faculty members, and administrators.
+    </li></ul><br>
+<li>Student Profile</li>
+<ul><li>Fields:</li>
+    <ul><li>user_id: Foreign key linking to the User entity.</li>
+   <li> photo: URL or path to the student's profile photo.</li>
+    <li>department_id: Foreign key linking to the Department entity.</li>
+    <li>year: Year of study (e.g., Freshman, Sophomore, etc.).</li></ul>
+    <li>Explanation: This entity extends the User entity to include additional information specific to students, such as their academic details, department, and year of study.
+    </li></ul><br>
+    <li>FacultyProfile</li>
+    <ul><li>Fields:</li>
+       <ul><li>user_id: Foreign key linking to the User entity.</li>
+        <li>photo: URL or path to the faculty member's profile photo.</li>
+        <li>department_id: Foreign key linking to the Department entity.</li>
+        <li>office_hours: Office hours for the faculty member.</li></ul>
+        <li>Explanation: This entity extends the User entity to include additional information specific to faculty members, such as their department and office hours.
+        </li></ul><br>
+        <li>Administration Profile</li>
+        <ul><li>Fields:
+           <ul><li>user_id: Foreign key linking to the User entity.</li>
+           <li>photo: URL or path to the administrator's profile photo.</li>
+            <li>department_id: Foreign key linking to the Department entity.</li></ul> 
+            <li>Explanation: This entity extends the User entity to include additional information specific to administrators, such as their department.
+            </li></ul><br>
+            <li>Course</li>
+            <ul><li>Fields:</li>
+              <ul><li> id: Unique identifier for each course.</li>
+               <li> title: Title of the course.</li>
+               <li> description: Description of the course content.</li>
+                <li>department_id: Foreign key linking to the Department entity.</li>
+                <li>faculty_id: Foreign key linking to the FacultyProfile entity.</li></ul>
+            <li>Explanation: This entity stores information about the courses offered by the college, including the title, description, department, and the faculty member responsible for the course.</li></ul><br>
+            <li>Enrollment</li>
+            <ul><li>Fields:
+              <ul><li>id: Unique identifier for each enrollment record.</li>
+               <li>student_id: Foreign key linking to the StudentProfile entity.</li>
+               <li>course_id: Foreign key linking to the Course entity.</li></ul>
+               <li> Explanation: This entity represents the many-to-many relationship between students and courses, indicating which students are enrolled in which courses.
+                </li></ul><br>
+                <li>Department</li>
+                <ul><li>Fields:</li>
+                   <ul><li> id: Unique identifier for each department.</li>
+                    <li>name: Name of the department.</li>
+                   <li>description: Description of the department.</li></ul>
+                   <li>Explanation: This entity stores information about the various departments within the college. It is referenced by the StudentProfile, FacultyProfile, AdministratorProfile, and Course entities to ensure proper association of users and courses with their respective departments.
+                    </li></ul><br>
+</ol>
+<li>Relationship</li>
+<ul><li>User to StudentProfile/FacultyProfile/AdministratorProfile:</li>
+    <ul><li>One-to-One relationship where each user has a corresponding profile in either the StudentProfile, FacultyProfile, or AdministratorProfile entities.</li></ul>
+    <li>FacultyProfile to Course:</li>
+    <ul><li>One-to-Many relationship where one faculty member can teach multiple courses.</li></ul>
+    <li>Course to StudentProfile (through Enrollment):</li>
+    <ul><li>Many-to-Many relationship facilitated by the Enrollment entity, where students can enroll in multiple courses, and each course can have multiple students.</li></ul>
+    <li>Department to StudentProfile/FacultyProfile/AdministratorProfile/Course:</li>
+   <ul><li> One-to-Many relationship where each department can have multiple students, faculty members, administrators, and courses associated with it.</li></ul>
+    </li></ul><br></div><br>
+    
+    <div class="box1">
+    <li>SQL</li>
+ <pre>-- Enum for Role
+ CREATE TYPE Role AS ENUM ('STUDENT', 'FACULTY_MEMBER', 'ADMINISTRATOR');
+        
+ -- User Table
+CREATE TABLE User (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role Role NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15)
+);
+          
+-- Department Table
+CREATE TABLE Department (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
+);
+
+-- FacultyProfile Table
+CREATE TABLE FacultyProfile (
+    user_id INTEGER PRIMARY KEY,
+    photo VARCHAR(255),
+    department_id INTEGER NOT NULL,
+    office_hours VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE
+);
+
+-- AdministratorProfile Table
+CREATE TABLE AdministratorProfile (
+    user_id INTEGER PRIMARY KEY,
+    photo VARCHAR(255),
+    department_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE
+);
+
+-- Course Table
+CREATE TABLE Course (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    department_id INTEGER NOT NULL,
+    faculty_id INTEGER NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES Department(id) ON DELETE CASCADE,
+    FOREIGN KEY (faculty_id) REFERENCES FacultyProfile(user_id) ON DELETE CASCADE
+);
+
+-- Enrollment Table
+CREATE TABLE Enrollment (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER NOT NULL,
+    course_id INTEGER NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES StudentProfile(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Course(id) ON DELETE CASCADE
+);
+
+-- Insert some data into Department
+INSERT INTO Department (name, description) VALUES 
+('Computer Science', 'Department of Computer Science'),
+('Mathematics', 'Department of Mathematics'),
+('Physics', 'Department of Physics'),
+('Chemistry', 'Department of Chemistry');
+
+</pre></div></ol>
+<h4>Evaluation Criteria:</h4>
+<ul><li>Functionality: Does the application meet all the specified requirements?</li>
+   <li> Code Quality: Is the code well-organized, readable, and maintainable?</li>
+    <li> UI/UX Design: Is the user interface intuitive and visually appealing?</li>
+     <li> Innovation: Are there any additional features that enhance the application?</li>
+    <li>Presentation: How well is the solution presented and demonstrated?
+    </li></ul>
+</body>
+</html>
